@@ -45,6 +45,7 @@ namespace SpriteKind {
     export const brown_ducks_kill_phase = SpriteKind.create()
     export const brown = SpriteKind.create()
     export const darkness = SpriteKind.create()
+    export const golden_duck = SpriteKind.create()
 }
 function blue_duck_game_over () {
     game.gameOver(false)
@@ -674,6 +675,7 @@ sprites.onOverlap(SpriteKind.yellow_duck, SpriteKind.yellow_ducks_moving2, funct
         tiles.placeOnTile(mySprite5, tiles.getTileLocation(39, 29))
     }
 })
+let mySprite50: Sprite = null
 let mySprite49: Sprite = null
 let mySprite22: Sprite = null
 let mySprite23: Sprite = null
@@ -1476,7 +1478,7 @@ if (Math.percentChance(85)) {
         `, SpriteKind.brown)
     tiles.placeOnTile(mySprite48, tiles.getTileLocation(16, 3))
     brown_ducks_movement()
-    info.setScore(300)
+    info.setScore(500)
     info.startCountdown(360)
 }
 if (Math.percentChance(15)) {
@@ -2308,4 +2310,29 @@ game.onUpdate(function () {
 })
 game.onUpdateInterval(2000, function () {
     info.changeScoreBy(-1)
+})
+game.onUpdateInterval(10000, function () {
+    if (Math.percentChance(1)) {
+        mySprite50 = sprites.create(img`
+            . . . . . . . . . . b 5 b . . . 
+            . . . . . . . . . b 5 b . . . . 
+            . . . . . . b b b b b b . . . . 
+            . . . . . b b 5 5 5 5 5 b . . . 
+            . . . . b b 5 f f f 5 5 5 f . . 
+            . . . . b 5 5 f f f 5 5 4 c . . 
+            . . . . b 5 5 f f f 5 5 4 4 . . 
+            . b b b 5 5 5 5 5 5 4 4 4 4 4 b 
+            b 5 5 5 b b 5 5 5 4 4 4 4 4 b . 
+            b b 5 5 5 5 b 5 5 5 5 5 5 b . . 
+            c 5 c 5 5 5 5 b 5 5 5 5 5 5 b . 
+            c b 5 c 5 5 5 b 5 5 5 5 5 5 b . 
+            . c 5 5 c c b 5 5 5 5 5 5 5 b . 
+            . . c b 5 5 5 5 5 5 5 5 b b . . 
+            . . . c c c c c c c c b b . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.golden_duck)
+        tiles.placeOnTile(mySprite50, tiles.getTileLocation(18, 37))
+        pause(10000)
+        game.reset()
+    }
 })
